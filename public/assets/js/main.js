@@ -3,7 +3,7 @@ $("path").bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", f
     $('.delete-icon').hide();
 });
 
-var myApp = angular.module('TodoApp', ['ui.sortable', 'ngAnimate']);
+var myApp = angular.module('TodoApp', ['ui.sortable']);
 
 myApp.controller('TodoController', function($scope, $http) {
 	$http.get('todos').success(function(todos) {
@@ -66,4 +66,3 @@ myApp.controller('TodoController', function($scope, $http) {
 	};
 });
 
-myApp.directive('')
