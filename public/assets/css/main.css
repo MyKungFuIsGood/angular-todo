@@ -1,0 +1,36 @@
+body {
+	font-size: 16px;
+}
+
+li {
+	padding: 5px;
+}
+
+.delete-icon {
+	display: inline-block;
+	padding: 1px;
+	width: 20px;
+	height: 20px;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	outline: 0;
+}
+.delete-icon:focus {
+	outline: 0;
+}
+
+.progress {
+	stroke-dasharray: 119;
+	stroke-dashoffset: 119;
+}
+
+.draw {
+	-webkit-animation: dash 3s ease forwards;
+}
+
+@-webkit-keyframes dash {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
