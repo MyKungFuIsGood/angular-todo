@@ -31,13 +31,13 @@
 						{{ todo.body }}
 					</label>
 					<button class="delete-icon" 
-						ng-mousedown="className='draw progress'"
-						ng-mouseup="className='progress'">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
+						ng-mousedown="todo.delete = true"
+						ng-mouseup="todo.delete = false">
+ 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" enable-background="new 0 0 45 45">
 							<line x1="15" y1="15" x2="25" y2="25" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
 							<line x1="25" y1="15" x2="15" y2="25" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
 							<circle class="circle" cx="20" cy="20" r="19" opacity="0" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10" fill="none"></circle>
-							<path ng-class="className" d="M20 1c10.45 0 19 8.55 19 19s-8.55 19-19 19-19-8.55-19-19 8.55-19 19-19z" class="progress" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10" fill="none"></path>
+							<path confirm-delete="todo.delete" d="M20 1c10.45 0 19 8.55 19 19s-8.55 19-19 19-19-8.55-19-19 8.55-19 19-19z" class="progress" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10" fill="none"></path>
 						</svg>
 					</button>
 			</li>
@@ -48,6 +48,7 @@
 	<script src='[[ asset("vendor/jquery-ui/jquery-ui.js") ]]'></script>
 	<script src='[[ asset("vendor/angularjs/angular.js") ]]'></script>
 	<script src='[[ asset("vendor/angular-ui-sortable/sortable.js") ]]'></script>
+	<script src='[[ asset("vendor/angular-animate/angular-animate.js") ]]'></script>
 	<script type="text/javascript" src='[[ asset("assets/js/main.js") ]]'></script>
 </body>
 

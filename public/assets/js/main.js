@@ -1,9 +1,5 @@
-$("path").bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-    console.log('callback');
-    $('.delete-icon').hide();
-});
 
-var myApp = angular.module('TodoApp', ['ui.sortable']);
+var myApp = angular.module('TodoApp', ['ui.sortable', 'ngAnimate']);
 
 myApp.controller('TodoController', function($scope, $http) {
 	$http.get('todos').success(function(todos) {
@@ -20,6 +16,7 @@ myApp.controller('TodoController', function($scope, $http) {
 
 	$scope.addTodo = function(todo) {
 		var todo = {
+			order: $scope.todos.length - 1,
 			body: $scope.newTodoText,
 			completed: false,
 		};
@@ -40,12 +37,22 @@ myApp.controller('TodoController', function($scope, $http) {
 	};
 
 	$scope.deleteTodo = function(todo) {
-		$http.delete('todo/' + todo.id).success(function() {
 			$scope.todos.splice($scope.todos.indexOf(todo), 1);
-		}).error(function(data) {
-			// print out error
-		});
+		// $http.delete('todo/' + todo.id).success(function() {
+		// 	$scope.todos.splice($scope.todos.indexOf(todo), 1);
+		// }).error(function(data) {
+		// 	// print out error
+		// });
 	};
+
+	$scope.confirmDelete = function(todo) {
+		var index = $scope.todos.indexOf(todo);
+		if(!$scope.todos[index].delete) {
+			$scope.todos[index].delete = true;
+		} else {
+			$scope.todos[index].delete = undefined;
+		}
+	}
 
 	$scope.todoSortable = {
 		// containment: "parent", // don't let us move object outside of parent container
@@ -64,5 +71,44 @@ myApp.controller('TodoController', function($scope, $http) {
 			});
 		}
 	};
+}); //myApp.controller
+
+myApp.directive("confirmDelete", function($animate) {
+	return function(scope, element, attrs) {
+		scope.$watch(attrs.confirmDelete, function(newVal) {
+			console.log(newVal);
+			if(newVal) {
+				$animate.addClass(element, "draw");
+			} else {
+				$animate.removeClass(element, "draw");
+			}
+		});
+	}
 });
 
+myApp.animation(".draw", function() {
+	return {
+		addClass: function(element, className, done) {
+			jQuery(element).animate({
+				"stroke-dashoffset": 0
+			}, 3000, "linear", function() {
+				console.log('finished');
+			});
+			return function(cancel) {
+				if(cancel) {
+					jQuery(element).stop();
+				}
+			}
+		},
+		removeClass: function(element, className, done) {
+			jQuery(element).animate({
+				"stroke-dashoffset": 119
+			}, 350, "linear", function() {
+				console.log('canceled');
+			});
+			return function(cancel) {
+				jQuery(element).stop();
+			}
+		}
+	}
+})

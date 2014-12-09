@@ -9,8 +9,8 @@ li {
 .delete-icon {
 	display: inline-block;
 	padding: 1px;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	border: 0;
 	background: none;
 	cursor: pointer;
@@ -25,6 +25,7 @@ li {
 	stroke-dashoffset: 119;
 }
 
+/*
 .draw {
 	-webkit-animation: dash 3s ease forwards;
 }
@@ -34,3 +35,4 @@ li {
 		stroke-dashoffset: 0;
 	}
 }
+*/
