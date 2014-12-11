@@ -37,6 +37,8 @@ myApp.controller('TodoController', function($scope, $http) {
 	};
 
 	$scope.deleteTodo = function(todo) {
+		console.log('made it!');
+		return;
 			$scope.todos.splice($scope.todos.indexOf(todo), 1);
 		// $http.delete('todo/' + todo.id).success(function() {
 		// 	$scope.todos.splice($scope.todos.indexOf(todo), 1);
@@ -76,9 +78,10 @@ myApp.controller('TodoController', function($scope, $http) {
 myApp.directive("confirmDelete", function($animate) {
 	return function(scope, element, attrs) {
 		scope.$watch(attrs.confirmDelete, function(newVal) {
-			console.log(newVal);
 			if(newVal) {
-				$animate.addClass(element, "draw");
+				$animate.addClass(element, "draw").then(function() {
+					scope.deleteTodo(scope.todo);
+				});
 			} else {
 				$animate.removeClass(element, "draw");
 			}
@@ -92,11 +95,15 @@ myApp.animation(".draw", function() {
 			jQuery(element).animate({
 				"stroke-dashoffset": 0
 			}, 3000, "linear", function() {
-				console.log('finished');
+				console.log(scope);
 			});
 			return function(cancel) {
 				if(cancel) {
-					jQuery(element).stop();
+					jQuery(element).stop().animate({
+						"stroke-dashoffset": 119
+					}, 350, "linear", function() {
+						console.log('canceled');
+					});
 				}
 			}
 		},

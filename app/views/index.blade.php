@@ -31,8 +31,8 @@
 						{{ todo.body }}
 					</label>
 					<button class="delete-icon" 
-						ng-mousedown="todo.delete = true"
-						ng-mouseup="todo.delete = false">
+						ng-mousedown="confirmDelete(todo)"
+						ng-mouseup="confirmDelete(todo)">
  						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" enable-background="new 0 0 45 45">
 							<line x1="15" y1="15" x2="25" y2="25" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
 							<line x1="25" y1="15" x2="15" y2="25" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
