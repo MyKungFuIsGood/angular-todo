@@ -28,6 +28,7 @@ myApp.controller('TodoController', function($scope, $http) {
 		});
 	};
 
+	// edits all columns on todo object
 	$scope.checkTodo = function(todo) {
 		$http.put('todo/' + todo.id, todo).success(function(data) {
 			//
@@ -79,43 +80,42 @@ myApp.directive("confirmDelete", function($animate) {
 	return function(scope, element, attrs) {
 		scope.$watch(attrs.confirmDelete, function(newVal) {
 			if(newVal) {
-				$animate.addClass(element, "draw").then(function() {
-					scope.deleteTodo(scope.todo);
-				});
+				console.log('omg deleted!');
+				// scope.deleteTodo(scope.todo);
 			} else {
-				$animate.removeClass(element, "draw");
+				//
 			}
 		});
 	}
 });
 
-myApp.animation(".draw", function() {
-	return {
-		addClass: function(element, className, done) {
-			jQuery(element).animate({
-				"stroke-dashoffset": 0
-			}, 3000, "linear", function() {
-				console.log(scope);
-			});
-			return function(cancel) {
-				if(cancel) {
-					jQuery(element).stop().animate({
-						"stroke-dashoffset": 119
-					}, 350, "linear", function() {
-						console.log('canceled');
-					});
-				}
-			}
-		},
-		removeClass: function(element, className, done) {
-			jQuery(element).animate({
-				"stroke-dashoffset": 119
-			}, 350, "linear", function() {
-				console.log('canceled');
-			});
-			return function(cancel) {
-				jQuery(element).stop();
-			}
-		}
-	}
-})
+// myApp.animation(".draw", function() {
+// 	return {
+// 		addClass: function(element, className, done) {
+// 			jQuery(element).animate({
+// 				"stroke-dashoffset": 0
+// 			}, 3000, "linear", function() {
+// 				console.log(scope);
+// 			});
+// 			return function(cancel) {
+// 				if(cancel) {
+// 					jQuery(element).stop().animate({
+// 						"stroke-dashoffset": 119
+// 					}, 350, "linear", function() {
+// 						console.log('canceled');
+// 					});
+// 				}
+// 			}
+// 		},
+// 		removeClass: function(element, className, done) {
+// 			jQuery(element).animate({
+// 				"stroke-dashoffset": 119
+// 			}, 350, "linear", function() {
+// 				console.log('canceled');
+// 			});
+// 			return function(cancel) {
+// 				jQuery(element).stop();
+// 			}
+// 		}
+// 	}
+// })
