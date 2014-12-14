@@ -2,6 +2,8 @@
 var myApp = angular.module('TodoApp', ['ui.sortable', 'ngAnimate']);
 
 myApp.controller('TodoController', function($scope, $http) {
+	$scope.deleting = false;
+
 	$http.get('todos').success(function(todos) {
 		$scope.todos = todos;
 	});
@@ -46,12 +48,7 @@ myApp.controller('TodoController', function($scope, $http) {
 	};
 
 	$scope.confirmDelete = function(todo) {
-		var index = $scope.todos.indexOf(todo);
-		if(!$scope.todos[index].delete) {
-			$scope.todos[index].delete = true;
-		} else {
-			$scope.todos[index].delete = undefined;
-		}
+		$scope.deleting = !$scope.deleting;
 	}
 
 	$scope.todoSortable = {
@@ -76,7 +73,6 @@ myApp.controller('TodoController', function($scope, $http) {
 myApp.directive("confirmDelete", function($animate) {
 	return function(scope, element, attrs) {
 		scope.$watch(attrs.confirmDelete, function(newVal) {
-			console.log(newVal);
 			if(newVal) {
 				$animate.addClass(element, "draw");
 			} else {
@@ -87,28 +83,36 @@ myApp.directive("confirmDelete", function($animate) {
 });
 
 myApp.animation(".draw", function() {
-	return {
-		addClass: function(element, className, done) {
-			jQuery(element).animate({
-				"stroke-dashoffset": 0
-			}, 3000, "linear", function() {
-				console.log('finished');
-			});
-			return function(cancel) {
-				if(cancel) {
-					jQuery(element).stop();
-				}
-			}
-		},
-		removeClass: function(element, className, done) {
-			jQuery(element).animate({
-				"stroke-dashoffset": 119
-			}, 350, "linear", function() {
-				console.log('canceled');
-			});
-			return function(cancel) {
-				jQuery(element).stop();
-			}
-		}
-	}
-})
+  return {
+    // removeClass: function(element, className, done) {
+    //   jQuery(element).animate({
+    //     "stroke-dashoffset": 119
+    //   }, 350, "linear", function() {
+    //     console.log('canceled');
+    //   });
+      
+    //   return function(cancel) {
+    //   	if(cancel) {
+	   //      jQuery(element).stop();
+    //   	}
+    //   }
+    // },
+    addClass: function(element, className, done) {
+      jQuery(element).stop().animate({
+        "stroke-dashoffset": 0
+      }, 3000, "easeOutCubic", function() {
+
+      });
+      
+      return function(cancel) {
+        if(cancel) {
+          jQuery(element).stop().animate({
+		        "stroke-dashoffset": 119
+		      }, 350, "linear", function() {
+
+		      });
+        }
+      }
+    },
+  }
+});

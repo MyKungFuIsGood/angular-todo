@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'angular',
+			'database'  => 'lara_todo',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

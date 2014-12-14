@@ -2,6 +2,7 @@
 /vendor
 vendor
 node_module
+database.php
 
 composer.phar
 composer.lock
