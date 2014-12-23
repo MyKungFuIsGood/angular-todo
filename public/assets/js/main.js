@@ -1,5 +1,5 @@
 
-var myApp = angular.module('TodoApp', ['ngAnimate']);
+var myApp = angular.module('TodoApp', ['ui.sortable', 'ngAnimate']);
 
 myApp.controller('TodoController', function($scope, $http) {
 	$http.get('todos').success(function(todos) {
