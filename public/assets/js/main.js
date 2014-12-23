@@ -18,7 +18,7 @@ myApp.controller('TodoController', ['$scope', '$http', function($scope, $http) {
 
 	$scope.addTodo = function(todo) {
 		var todo = {
-			order: $scope.todos.length - 1,
+			order: $scope.todos.length,
 			body: $scope.newTodoText,
 			completed: false,
 		};
@@ -88,6 +88,7 @@ myApp.directive("animateSvgPath", function($animate) {
 	}
 });
 
+// jQuery approach to animation
 // app.animation(".draw", function() {
 //   return {
 //     addClass: function(element, className, done) {
