@@ -1,7 +1,7 @@
 
 var myApp = angular.module('TodoApp', ['ui.sortable', 'ngAnimate']);
 
-myApp.controller('TodoController', function($scope, $http) {
+myApp.controller('TodoController', ['$scope', '$http', function($scope, $http) {
 	$http.get('todos').success(function(todos) {
 		$scope.todos = todos;
 	});
@@ -63,7 +63,7 @@ myApp.controller('TodoController', function($scope, $http) {
 			});
 		}
 	};
-}); //myApp.controller
+}]); //myApp.controller
 
 myApp.directive("animateSvgPath", function($animate) {
 	return {
