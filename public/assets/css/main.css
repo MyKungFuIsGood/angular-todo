@@ -20,14 +20,17 @@ li {
 	outline: 0;
 }
 
-.progress {
+.svg-path {
 	stroke-dasharray: 119;
 	stroke-dashoffset: 119;
 }
 
-
-.draw {
+.animate-path {
 	-webkit-animation: dash 3s ease forwards;
+}
+.animate-path-add {
+}
+.animate-path-add-active {
 }
 
 @-webkit-keyframes dash {
